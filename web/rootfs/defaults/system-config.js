@@ -1,4 +1,4 @@
-{{ $XMPP_DOMAIN := .Env.XMPP_DOMAIN | default "jitsi-meet.example.com" -}}
+{{ $XMPP_DOMAIN := .Env.XMPP_DOMAIN -}}
 {{ $CONFIG_BOSH_HOST := .Env.CONFIG_BOSH_HOST | default "" }}
 {{ $XMPP_MUC_DOMAIN_PREFIX := .Env.XMPP_MUC_DOMAIN_PREFIX | default "conference" -}}
 {{ $XMPP_MUC_DOMAIN := .Env.XMPP_MUC_DOMAIN | default "" -}}

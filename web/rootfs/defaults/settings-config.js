@@ -1,4 +1,4 @@
-{{ $XMPP_DOMAIN := .Env.XMPP_DOMAIN | default "jitsi-meet.example.com" -}}
+{{ $XMPP_DOMAIN := .Env.XMPP_DOMAIN -}}
 {{ $CONFIG_RESOLUTION := .Env.CONFIG_RESOLUTION | default "720" -}}
 {{ $CONFIG_RESOLUTION_MIN := .Env.CONFIG_RESOLUTION_MIN | default "180" -}}
 {{ $CONFIG_RESOLUTION_WIDTH := .Env.CONFIG_RESOLUTION_WIDTH | default "1280" -}}
