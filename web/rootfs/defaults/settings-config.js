@@ -1,5 +1,4 @@
 {{ $XMPP_DOMAIN := .Env.XMPP_DOMAIN | default "jitsi-meet.example.com" -}}
-{{ $CONFIG_BOSH_HOST := .Env.CONFIG_BOSH_HOST | default "" }}
 {{ $CONFIG_RESOLUTION := .Env.CONFIG_RESOLUTION | default "720" -}}
 {{ $CONFIG_RESOLUTION_MIN := .Env.CONFIG_RESOLUTION_MIN | default "180" -}}
 {{ $CONFIG_RESOLUTION_WIDTH := .Env.CONFIG_RESOLUTION_WIDTH | default "1280" -}}
@@ -10,7 +9,6 @@
 {{ $ENABLE_RECORDING := .Env.ENABLE_RECORDING | default "false" | toBool -}}
 {{ $CONFIG_FILE_RECORDING_SERVICE_ENABLED := .Env.CONFIG_FILE_RECORDING_SERVICE_ENABLED | default "false" | toBool -}}
 {{ $CONFIG_FILE_RECORDING_SERVICE_SHARING_ENABLED := .Env.CONFIG_FILE_RECORDING_SERVICE_SHARING_ENABLED | default "false" | toBool -}}
-{{ $CONFIG_EXTERNAL_CONNECT := .Env.CONFIG_EXTERNAL_CONNECT | default "false" | toBool -}}
 {{ $XMPP_RECORDER_DOMAIN := .Env.XMPP_RECORDER_DOMAIN | default "" -}}
 {{ $XMPP_RECORDER_DOMAIN_PREFIX := .Env.XMPP_RECORDER_DOMAIN_PREFIX | default "recorder" -}}
 {{ $CONFIG_CHROME_MIN_EXT_VERSION := .Env.CONFIG_CHROME_MIN_EXT_VERSION | default "0.1" -}}
@@ -18,7 +16,6 @@
 {{ $CONFIG_TESTING_OCTO_PROBABILITY := .Env.CONFIG_TESTING_OCTO_PROBABILITY | default "0" -}}
 {{ $CONFIG_TESTING_CAP_SCREENSHARE_BITRATE := .Env.CONFIG_TESTING_CAP_SCREENSHARE_BITRATE | default "1" -}}
 {{ $ENABLE_LIPSYNC := .Env.ENABLE_LIPSYNC | default "false" | toBool -}}
-{{ $ENABLE_SUBDOMAINS := .Env.ENABLE_SUBDOMAINS | default "false" | toBool -}}
 {{ $ENABLE_TRANSCRIPTIONS := .Env.ENABLE_TRANSCRIPTIONS | default "false" | toBool -}}
 {{ $CONFIG_ENABLE_STATS_ID := .Env.CONFIG_ENABLE_STATS_ID | default "false" | toBool -}}
 {{ $CONFIG_OPEN_BRIDGE_CHANNEL := .Env.CONFIG_OPEN_BRIDGE_CHANNEL | default "datachannel" -}}
@@ -34,14 +31,6 @@
 {{ $CONFIG_USE_STUN_TURN := .Env.CONFIG_USE_STUN_TURN | default "true" | toBool -}}
 {{ $CONFIG_USE_IPV6 := .Env.CONFIG_USE_IPV6 | default "true" | toBool -}}
 {{ $CONFIG_DEPLOYMENTINFO_USERREGION := .Env.CONFIG_DEPLOYMENTINFO_USERREGION | default "<!--# echo var=\"http_x_proxy_region\" default=\"\" -->" -}}
-
-{{ if $CONFIG_EXTERNAL_CONNECT -}}
-    {{ if $ENABLE_SUBDOMAINS -}}
-config.externalConnectUrl = '//{{ if .Env.CONFIG_BOSH_HOST }}{{ .Env.CONFIG_BOSH_HOST }}{{ end }}/<!--# echo var="subdir" default="" -->http-pre-bind';
-    {{ else -}}
-config.externalConnectUrl = '//{{ if .Env.CONFIG_BOSH_HOST }}{{ .Env.CONFIG_BOSH_HOST }}{{ end }}/http-pre-bind';
-    {{ end -}}
-{{ end -}}
 
 config.startAudioMuted = {{ $CONFIG_START_AUDIO_MUTED }};
 config.startVideoMuted = {{ $CONFIG_START_VIDEO_MUTED }};

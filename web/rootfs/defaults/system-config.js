@@ -5,6 +5,7 @@
 {{ $XMPP_AUTH_DOMAIN_PREFIX := .Env.XMPP_AUTH_DOMAIN_PREFIX | default "auth" -}}
 {{ $XMPP_AUTH_DOMAIN := .Env.XMPP_AUTH_DOMAIN | default "" -}}
 {{ $JICOFO_AUTH_USER := .Env.JICOFO_AUTH_USER | default "focus" -}}
+{{ $CONFIG_EXTERNAL_CONNECT := .Env.CONFIG_EXTERNAL_CONNECT | default "false" | toBool -}}
 
 {{ $ENABLE_SUBDOMAINS := .Env.ENABLE_SUBDOMAINS | default "false" | toBool -}}
 {{ $ENABLE_GUESTS := .Env.ENABLE_GUESTS | default "false" | toBool -}}
@@ -52,4 +53,12 @@ config.hosts.authdomain = '{{ $XMPP_DOMAIN }}';
 config.bosh = '{{ if $CONFIG_BOSH_HOST }}https://{{ $CONFIG_BOSH_HOST }}{{ end }}/http-bind';
 {{ if $ENABLE_WEBSOCKETS -}}
 config.websocket = 'wss://{{ if $CONFIG_BOSH_HOST }}{{ $CONFIG_BOSH_HOST }}{{end}}/xmpp-websocket';
+{{ end -}}
+
+{{ if $CONFIG_EXTERNAL_CONNECT -}}
+    {{ if $ENABLE_SUBDOMAINS -}}
+config.externalConnectUrl = '//{{ if .Env.CONFIG_BOSH_HOST }}{{ .Env.CONFIG_BOSH_HOST }}{{ end }}/<!--# echo var="subdir" default="" -->http-pre-bind';
+    {{ else -}}
+config.externalConnectUrl = '//{{ if .Env.CONFIG_BOSH_HOST }}{{ .Env.CONFIG_BOSH_HOST }}{{ end }}/http-pre-bind';
+    {{ end -}}
 {{ end -}}
