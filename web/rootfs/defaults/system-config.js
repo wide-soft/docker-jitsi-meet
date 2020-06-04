@@ -49,7 +49,6 @@ config.hosts.anonymousdomain = '{{ .Env.XMPP_GUEST_DOMAIN }}';
 config.hosts.authdomain = '{{ $XMPP_DOMAIN }}';
 {{ end -}}
 
-// BOSH URL. FIXME: use XEP-0156 to discover it.
 config.bosh = '{{ if $CONFIG_BOSH_HOST }}https://{{ $CONFIG_BOSH_HOST }}{{ end }}/http-bind';
 {{ if $ENABLE_WEBSOCKETS -}}
 config.websocket = 'wss://{{ if $CONFIG_BOSH_HOST }}{{ $CONFIG_BOSH_HOST }}{{end}}/xmpp-websocket';
