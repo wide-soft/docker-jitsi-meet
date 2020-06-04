@@ -1,17 +1,16 @@
-{{ $XMPP_DOMAIN := .Env.XMPP_DOMAIN -}}
-{{ $CONFIG_BOSH_HOST := .Env.CONFIG_BOSH_HOST | default "" }}
-{{ $XMPP_MUC_DOMAIN_PREFIX := .Env.XMPP_MUC_DOMAIN_PREFIX | default "conference" -}}
-{{ $XMPP_MUC_DOMAIN := .Env.XMPP_MUC_DOMAIN | default "" -}}
-{{ $XMPP_AUTH_DOMAIN_PREFIX := .Env.XMPP_AUTH_DOMAIN_PREFIX | default "auth" -}}
-{{ $XMPP_AUTH_DOMAIN := .Env.XMPP_AUTH_DOMAIN | default "" -}}
-{{ $JICOFO_AUTH_USER := .Env.JICOFO_AUTH_USER | default "focus" -}}
+{{ $CONFIG_BOSH_HOST := .Env.CONFIG_BOSH_HOST | default "" -}}
 {{ $CONFIG_EXTERNAL_CONNECT := .Env.CONFIG_EXTERNAL_CONNECT | default "false" | toBool -}}
-
-{{ $ENABLE_SUBDOMAINS := .Env.ENABLE_SUBDOMAINS | default "false" | toBool -}}
-{{ $ENABLE_GUESTS := .Env.ENABLE_GUESTS | default "false" | toBool -}}
-{{ $ENABLE_AUTH := .Env.ENABLE_AUTH | default "false" | toBool -}}
-{{ $ENABLE_WEBSOCKETS := .Env.ENABLE_WEBSOCKETS | default "false" | toBool -}}
 {{ $CONFIG_USE_FOCUS_USER := .Env.CONFIG_USE_FOCUS_USER | default "true" | toBool -}}
+{{ $ENABLE_AUTH := .Env.ENABLE_AUTH | default "false" | toBool -}}
+{{ $ENABLE_GUESTS := .Env.ENABLE_GUESTS | default "false" | toBool -}}
+{{ $ENABLE_SUBDOMAINS := .Env.ENABLE_SUBDOMAINS | default "false" | toBool -}}
+{{ $ENABLE_WEBSOCKETS := .Env.ENABLE_WEBSOCKETS | default "false" | toBool -}}
+{{ $JICOFO_AUTH_USER := .Env.JICOFO_AUTH_USER | default "focus" -}}
+{{ $XMPP_AUTH_DOMAIN := .Env.XMPP_AUTH_DOMAIN | default "" -}}
+{{ $XMPP_AUTH_DOMAIN_PREFIX := .Env.XMPP_AUTH_DOMAIN_PREFIX | default "auth" -}}
+{{ $XMPP_DOMAIN := .Env.XMPP_DOMAIN -}}
+{{ $XMPP_MUC_DOMAIN := .Env.XMPP_MUC_DOMAIN | default "" -}}
+{{ $XMPP_MUC_DOMAIN_PREFIX := .Env.XMPP_MUC_DOMAIN_PREFIX | default "conference" -}}
 
 // begin default config overrides
 Object.assign(config.hosts, {});
