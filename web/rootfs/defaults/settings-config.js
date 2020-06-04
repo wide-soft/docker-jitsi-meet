@@ -11,7 +11,6 @@
 {{ $CONFIG_FILE_RECORDING_SERVICE_SHARING_ENABLED := .Env.CONFIG_FILE_RECORDING_SERVICE_SHARING_ENABLED | default "false" | toBool -}}
 {{ $XMPP_RECORDER_DOMAIN := .Env.XMPP_RECORDER_DOMAIN | default "" -}}
 {{ $XMPP_RECORDER_DOMAIN_PREFIX := .Env.XMPP_RECORDER_DOMAIN_PREFIX | default "recorder" -}}
-{{ $CONFIG_CHROME_MIN_EXT_VERSION := .Env.CONFIG_CHROME_MIN_EXT_VERSION | default "0.1" -}}
 {{ $CONFIG_ENABLE_USER_ROLES_BASED_ON_TOKEN := .Env.CONFIG_ENABLE_USER_ROLES_BASED_ON_TOKEN | default "false" -}}
 {{ $CONFIG_TESTING_OCTO_PROBABILITY := .Env.CONFIG_TESTING_OCTO_PROBABILITY | default "0" -}}
 {{ $CONFIG_TESTING_CAP_SCREENSHARE_BITRATE := .Env.CONFIG_TESTING_CAP_SCREENSHARE_BITRATE | default "1" -}}
@@ -52,11 +51,6 @@ Object.assign(config.testing, {});
 config.testing.capScreenshareBitrate = {{ $CONFIG_TESTING_CAP_SCREENSHARE_BITRATE }};
 Object.assign(config.testing.octo, {});
 config.testing.octo.probability = {{ $CONFIG_TESTING_OCTO_PROBABILITY }};
-
-{{ if .Env.CONFIG_CHROME_EXT_ID -}}
-config.desktopSharingChromeExtId = '{{.Env.CONFIG_CHROME_EXT_ID}}';
-config.desktopSharingChromeMinExtVersion = '{{ $CONFIG_CHROME_MIN_EXT_VERSION }}';
-{{ end -}}
 
 {{ if $ENABLE_RECORDING }}
 // recording settings
