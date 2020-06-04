@@ -13,7 +13,7 @@
 {{ $CONFIG_USE_FOCUS_USER := .Env.CONFIG_USE_FOCUS_USER | default "true" | toBool -}}
 
 // begin default config overrides
-if (!config.hasOwnProperty('hosts')) config.hosts={};
+Object.assign(config.hosts, {});
 config.hosts.domain = '{{ $XMPP_DOMAIN }}';
 {{ if $CONFIG_USE_FOCUS_USER -}}
 {{ if $XMPP_AUTH_DOMAIN -}}

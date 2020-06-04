@@ -47,8 +47,8 @@ config.startAudioMuted = {{ $CONFIG_START_AUDIO_MUTED }};
 config.startVideoMuted = {{ $CONFIG_START_VIDEO_MUTED }};
 
 config.resolution = {{ $CONFIG_RESOLUTION }};
-if (!config.hasOwnProperty('constraints')) config.constraints={};
-if (!config.constraints.hasOwnProperty('video')) config.constraints.video={};
+Object.assign(config.constraints, {});
+Object.assign(config.constraints.video, {});
 config.constraints.video.height = {ideal: {{$CONFIG_RESOLUTION}}, max: {{$CONFIG_RESOLUTION}}, min: {{$CONFIG_RESOLUTION_MIN}}};
 config.constraints.video.width = {ideal: {{$CONFIG_RESOLUTION_WIDTH}}, max: {{$CONFIG_RESOLUTION_WIDTH}}, min: {{$CONFIG_RESOLUTION_WIDTH_MIN}}};
 
@@ -59,9 +59,9 @@ config.enableRemb = {{ $CONFIG_ENABLE_REMB }};
 config.disableSimulcast = {{ $CONFIG_DISABLE_SIMULCAST }};
 
 // testing values, defaults should be sane
-if (!config.hasOwnProperty('testing')) config.testing={};
+Object.assign(config.testing, {});
 config.testing.capScreenshareBitrate = {{ $CONFIG_TESTING_CAP_SCREENSHARE_BITRATE }};
-if (!config.testing.hasOwnProperty('octo')) config.testing.octo={};
+Object.assign(config.testing.octo, {});
 config.testing.octo.probability = {{ $CONFIG_TESTING_OCTO_PROBABILITY }};
 
 {{ if .Env.CONFIG_CHROME_EXT_ID -}}
@@ -83,7 +83,7 @@ config.fileRecordingsEnabled = true;
 config.liveStreamingEnabled = true;
 {{ if .Env.CONFIG_DROPBOX_APPKEY -}}
 // Enable the dropbox integration.
-if (!config.hasOwnProperty('dropbox')) config.dropbox={};
+Object.assign(config.dropbox, {});
 config.dropbox.appKey = '{{ .Env.CONFIG_DROPBOX_APPKEY }}';
 {{ if .Env.CONFIG_DROPBOX_REDIRECT_URI -}}
 // A URL to redirect the user to, after authenticating
@@ -169,11 +169,11 @@ config.enableStatsID = true;
 {{ end -}}
 
 {{ if .Env.CONFIG_P2P_STUNTURN -}}
-if (!config.hasOwnProperty('p2p')) config.p2p={enabled: true};
+Object.assign(config.p2p, {});
 config.p2p.useStunTurn = true;
 {{ end -}}
 
-if (!config.hasOwnProperty('analytics')) config.analytics={};
+Object.assign(config.analytics, {});
 {{ if .Env.CONFIG_GOOGLE_ANALYTICS_ID -}}
 // The Google Analytics Tracking ID:
 config.analytics.googleAnalyticsTrackingId = '{{ .Env.CONFIG_GOOGLE_ANALYTICS_ID }}';
@@ -190,7 +190,7 @@ config.analytics.whiteListedEvents = [ '{{ join "','" (splitList "," .Env.CONFIG
 config.analytics.scriptURLs = [ '{{ join "','" (splitList "," .Env.CONFIG_ANALYTICS_SCRIPT_URLS) }}' ];
 {{ end -}}
 
-if (!config.hasOwnProperty('deploymentInfo')) config.deploymentInfo={};
+Object.assign(config.deploymentInfo, {});
 {{ if .Env.CONFIG_DEPLOYMENTINFO_ENVIRONMENT -}}
 config.deploymentInfo.environment = '{{ .Env.CONFIG_DEPLOYMENTINFO_ENVIRONMENT }}';
 {{ end -}}
