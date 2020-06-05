@@ -13,7 +13,7 @@
 {{ $XMPP_MUC_DOMAIN_PREFIX := .Env.XMPP_MUC_DOMAIN_PREFIX | default "conference" -}}
 
 // begin default config overrides
-Object.assign(config.hosts, {});
+if (!config.hasOwnProperty('hosts')) config.hosts = {};
 config.hosts.domain = '{{ $XMPP_DOMAIN }}';
 {{ if $CONFIG_USE_FOCUS_USER -}}
 {{ if $XMPP_AUTH_DOMAIN -}}
