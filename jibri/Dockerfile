@@ -44,6 +44,12 @@ RUN \
         && apt-dpkg-wrap apt-get install -y jitsi-upload-integrations jq \
         && apt-cleanup
 
+RUN \
+        apt-dpkg-wrap apt-get update \
+        && apt-dpkg-wrap apt-get install -y python3-pip \
+        && pip3 install requests boto3 \
+        && apt-cleanup
+
 COPY rootfs/ /
 
 VOLUME /config
